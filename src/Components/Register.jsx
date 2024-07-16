@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
@@ -7,7 +8,7 @@ const Register = () => {
         <div className="hero-content flex-col">
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <form className="card-body">
-              <p>Register Here</p>
+              <p className="text-2xl font-semibold">Register Here</p>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -26,6 +27,17 @@ const Register = () => {
                 <input
                   type="email"
                   placeholder="email"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Number</span>
+                </label>
+                <input
+                  type="number"
+                  placeholder="number"
                   className="input input-bordered"
                   required
                 />
