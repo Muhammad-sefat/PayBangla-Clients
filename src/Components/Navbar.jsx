@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa6";
 import logo from "../assets/pay.webp";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+
+    navigate("/");
+    toast("Logout Successfull!");
+  };
   return (
     <div className="navbar bg-blue-500 -mt-7 rounded px-7">
       <div className="flex-1">
@@ -10,23 +27,13 @@ const Navbar = () => {
         <a className="ml-2 text-2xl font-bold text-white">PayBangla</a>
       </div>
       <div className="flex-none">
-        <div className="dropdown dropdown-end mr-4">
-          <p className="text-xl text-white">
-            <FaBars />
-          </p>
-          <div
-            tabIndex={0}
-            className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow"
-          >
-            <div className="card-body">
-              <span className="text-lg font-bold">8 Items</span>
-              <span className="text-info">Subtotal: $999</span>
-              <div className="card-actions">
-                <button className="btn btn-primary btn-block">View cart</button>
-              </div>
-            </div>
+        {isLoggedIn && (
+          <div className="dropdown dropdown-end mr-4">
+            <Link to={"/dashboard"} className="text-xl text-white">
+              <FaBars />
+            </Link>
           </div>
-        </div>
+        )}
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
@@ -48,7 +55,7 @@ const Navbar = () => {
               <a>Profile</a>
             </li>
             <li>
-              <a>Logout</a>
+              <a onClick={handleLogout}>Logout</a>
             </li>
           </ul>
         </div>
