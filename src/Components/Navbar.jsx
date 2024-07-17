@@ -17,8 +17,10 @@ const Navbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
 
-    navigate("/");
+    setIsLoggedIn(false);
+
     toast("Logout Successfull!");
+    navigate("/");
   };
   return (
     <div className="navbar bg-blue-500 -mt-7 rounded px-7">
